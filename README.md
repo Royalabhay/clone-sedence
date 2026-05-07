@@ -1,12 +1,36 @@
 # clone-sedence
 
-This repository currently contains only project metadata. No runnable application source code, package manifest, test suite, or local development scripts have been added yet.
+A dependency-free static browser app that can be run locally from this repository.
+
+## Run in a browser
+
+From the repository root, start a local static server:
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open this URL in your browser:
+
+```text
+http://localhost:4173
+```
+
+You can also open `index.html` directly, but using the local server matches how browsers load static sites in development.
+
+## Functionality available locally
+
+The included static page verifies the app can load in a browser and includes:
+
+- a responsive landing page for `clone-sedence`;
+- a theme toggle that persists with `localStorage`;
+- a live local-time display;
+- a button that copies the local run command.
 
 ## Local verification
 
-Because there is no application code in the repository, there is currently nothing to install, build, test, or run locally. The repository can be validated with the following checks:
-
 ```bash
 git status --short
-find . -type f -not -path './.git/*' -print
+python3 -m http.server 4173
+curl -I http://127.0.0.1:4173/
 ```
