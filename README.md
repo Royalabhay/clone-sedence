@@ -2,19 +2,38 @@
 
 A dependency-free static browser app that can be run locally from this repository.
 
-## Run in a browser
+## Quick start: view it live in your local browser
 
-From the repository root, start a local static server:
+1. Open a terminal in the repository root.
+2. Start the local server:
+
+   ```bash
+   ./start-local.sh
+   ```
+
+3. Keep that terminal running and open this URL in your browser:
+
+   ```text
+   http://127.0.0.1:4173
+   ```
+
+4. To stop the local server, go back to the terminal and press <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+
+If you do not want to use the helper script, run Python directly instead:
 
 ```bash
-python3 -m http.server 4173
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Then open this URL in your browser:
+Then open `http://127.0.0.1:4173` in your browser.
 
-```text
-http://localhost:4173
+If port `4173` is already in use, choose another port:
+
+```bash
+PORT=5173 ./start-local.sh
 ```
+
+Then open `http://127.0.0.1:5173`.
 
 You can also open `index.html` directly, but using the local server matches how browsers load static sites in development.
 
@@ -31,6 +50,6 @@ The included static page verifies the app can load in a browser and includes:
 
 ```bash
 git status --short
-python3 -m http.server 4173
+./start-local.sh
 curl -I http://127.0.0.1:4173/
 ```
