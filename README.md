@@ -54,7 +54,7 @@ Run the local check script:
 ./check-local.sh
 ```
 
-The script validates shell syntax, parses `index.html`, starts a temporary local server, and verifies the page responds.
+The script validates shell syntax, parses `index.html`, starts a temporary local server, and verifies the page responds. It intentionally uses only `bash`, `python3`, and `curl`; no `npx`, Playwright, Chromium, or browser download is required.
 
 To verify manually, start the server in one terminal:
 
@@ -67,3 +67,16 @@ Then verify the running page from another terminal:
 ```bash
 curl -I http://127.0.0.1:4173/
 ```
+
+
+## Troubleshooting
+
+### Playwright or Chromium download errors
+
+This project does not require Playwright or Chromium to run or verify locally. If you see errors such as `Chromium was unavailable` or `HTTP 403 Domain forbidden` while running `npx playwright ...`, skip those commands and use the built-in local check instead:
+
+```bash
+./check-local.sh
+```
+
+For a visual check, run `./start-local.sh` and open `http://127.0.0.1:4173` in your own browser.
