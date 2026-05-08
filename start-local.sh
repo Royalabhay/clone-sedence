@@ -17,13 +17,21 @@ fi
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
-URL="http://${HOST}:${PORT}"
+BROWSER_HOST="${HOST}"
+if [[ "${HOST}" == "0.0.0.0" || "${HOST}" == "::" ]]; then
+  BROWSER_HOST="127.0.0.1"
+fi
+
+URL="http://${BROWSER_HOST}:${PORT}"
 
 cat <<MESSAGE
 Starting clone-sedence locally from:
   ${SCRIPT_DIR}
 
-Open this URL in your browser:
+Server bind address:
+  ${HOST}:${PORT}
+
+Open this URL in your browser address bar:
   ${URL}
 
 Press Ctrl+C in this terminal to stop the server.
