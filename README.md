@@ -48,8 +48,22 @@ The included static page verifies the app can load in a browser and includes:
 
 ## Local verification
 
+Run the local check script:
+
 ```bash
-git status --short
+./check-local.sh
+```
+
+The script validates shell syntax, parses `index.html`, starts a temporary local server, and verifies the page responds.
+
+To verify manually, start the server in one terminal:
+
+```bash
 ./start-local.sh
+```
+
+Then verify the running page from another terminal:
+
+```bash
 curl -I http://127.0.0.1:4173/
 ```

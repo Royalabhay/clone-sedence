@@ -171,8 +171,23 @@
       const localTime = document.querySelector('#local-time');
       const runCommand = './start-local.sh';
 
-      const savedTheme = localStorage.getItem('clone-sedence-theme');
-      if (savedTheme === 'dark') {
+      const getSavedTheme = () => {
+        try {
+          return localStorage.getItem('clone-sedence-theme');
+        } catch {
+          return null;
+        }
+      };
+
+      const saveTheme = (theme) => {
+        try {
+          localStorage.setItem('clone-sedence-theme', theme);
+        } catch {
+          // Theme persistence is optional; the toggle still works for the current page load.
+        }
+      };
+
+      if (getSavedTheme() === 'dark') {
         body.classList.add('dark');
       }
 
@@ -190,20 +205,26 @@
 
       themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark');
-        localStorage.setItem('clone-sedence-theme', body.classList.contains('dark') ? 'dark' : 'light');
+        saveTheme(body.classList.contains('dark') ? 'dark' : 'light');
       });
 
       copyCommand.addEventListener('click', async () => {
-        if (navigator.clipboard) {
+        try {
+          if (!navigator.clipboard) {
+            throw new Error('Clipboard API is unavailable.');
+          }
+
           await navigator.clipboard.writeText(runCommand);
           copyCommand.textContent = 'Copied!';
-        } else {
+        } catch {
           copyCommand.textContent = runCommand;
+          copyCommand.setAttribute('aria-label', `Copy manually: ${runCommand}`);
         }
 
         setTimeout(() => {
           copyCommand.textContent = 'Copy run command';
-        }, 1400);
+          copyCommand.removeAttribute('aria-label');
+        }, 1800);
       });
     </script>
   </body>
